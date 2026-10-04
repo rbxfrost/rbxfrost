@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>rbxfrost — робуксы по курсу 1 ₽ = 1,3 R$</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#0b1f4d;--bg2:#13326e;--card:rgba(120,170,255,.09);--line:rgba(120,170,255,.24);--tx:#e8f1ff;--mut:#93b0dc;--ice:#5aa8ff;--ice2:#a9d0ff;--btn:#4f9bff;--btnt:#04163a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#e6f0ff;--bg2:#d0e2ff;--card:rgba(255,255,255,.7);--line:rgba(30,80,170,.22);--tx:#0b1d3e;--mut:#4a6590;--ice:#1f63d6;--ice2:#123f94;--btn:#1f63d6;--btnt:#fff}}
+:root[data-theme="light"]{--bg:#e6f0ff;--bg2:#d0e2ff;--card:rgba(255,255,255,.7);--line:rgba(30,80,170,.22);--tx:#0b1d3e;--mut:#4a6590;--ice:#1f63d6;--ice2:#123f94;--btn:#1f63d6;--btnt:#fff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 Manrope,system-ui,sans-serif;overflow-x:hidden}
+@media(hover:hover) and (pointer:fine){*{cursor:none!important}}
+h1,h2,h3,.logo{font-family:Unbounded,system-ui,sans-serif;line-height:1.15;margin:0}
+a{color:inherit;text-decoration:none}
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.glow{position:fixed;top:-20vh;left:50%;width:90vw;height:70vh;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(90,168,255,.22),transparent);pointer-events:none;z-index:0}
+main,header,footer{position:relative;z-index:1}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px}
+.logo{font-size:20px;font-weight:700;letter-spacing:.5px}.logo b{color:var(--ice)}
+nav{display:flex;gap:18px;align-items:center;font-size:14px;color:var(--mut)}
+nav a:hover{color:var(--ice)}
+.ib{background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:50%;width:38px;height:38px;font-size:16px}
+.hero{padding:48px 0 70px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+h1{font-size:clamp(30px,5vw,52px);font-weight:700}
+h1 span{display:block;color:var(--ice2)}
+.lead{color:var(--mut);max-width:46ch;margin:18px 0 22px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 14px;font-size:13px;color:var(--mut)}
+.box{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.12)}
+.box h3{font-size:18px;margin-bottom:4px}
+.rate{color:var(--ice);font-size:14px;margin-bottom:16px}
+label{display:block;font-size:13px;color:var(--mut);margin:12px 0 6px}
+.in{width:100%;background:rgba(5,15,50,.3);border:1px solid var(--line);border-radius:12px;color:var(--tx);font:inherit;font-size:18px;padding:12px 14px;outline:0;transition:border-color .2s,box-shadow .2s}
+.in:focus{border-color:var(--ice);box-shadow:0 0 0 3px rgba(90,168,255,.2)}
+.row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.chip{flex:1;min-width:64px;background:transparent;border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:8px;font:inherit;font-size:14px}
+.chip:hover,.chip.on{border-color:var(--ice);background:rgba(90,168,255,.12)}
+.btn{display:block;width:100%;margin-top:18px;background:var(--btn);color:var(--btnt);border:0;border-radius:14px;padding:15px;font:700 16px Manrope,sans-serif;position:relative;overflow:hidden;transition:transform .15s,box-shadow .25s;box-shadow:0 8px 28px rgba(90,168,255,.3)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(90,168,255,.45)}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 3.5s infinite}
+@keyframes shine{to{left:130%}}
+.small{font-size:12px;color:var(--mut);text-align:center;margin-top:10px}
+section{padding:56px 0}
+h2{font-size:clamp(24px,3.4vw,34px);margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+.card h3{font-size:16px;margin-bottom:8px}.card p{margin:0;color:var(--mut);font-size:14px}
+.card .ic{font-size:26px;margin-bottom:10px}
+.pk{text-align:left;font:inherit;color:var(--tx);transition:transform .2s,border-color .2s}
+.pk:hover{transform:translateY(-4px);border-color:var(--ice)}
+.pk .r{font-family:Unbounded,sans-serif;font-size:26px;color:var(--ice2)}
+.pk .p{color:var(--mut);font-size:14px;margin-top:4px}
+.pk.hot{border-color:var(--ice);box-shadow:0 0 30px rgba(90,168,255,.18)}
+.pk em{font-style:normal;font-size:12px;background:var(--ice);color:var(--btnt);border-radius:99px;padding:2px 10px;margin-left:6px;vertical-align:middle}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:10px}
+summary{font-weight:700;list-style:none}summary::-webkit-details-marker{display:none}
+details p{color:var(--mut);margin:10px 0 0;font-size:15px}
+footer{border-top:1px solid var(--line);padding:30px 0 40px;color:var(--mut);font-size:13px}
+#cur,#cur2{position:fixed;top:0;left:0;pointer-events:none;z-index:99;display:none}
+@media(hover:hover) and (pointer:fine){#cur,#cur2{display:block}}
+#cur{width:8px;height:8px;margin:-4px 0 0 -4px;background:var(--ice2);border-radius:50%}
+#cur2{width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid var(--ice);border-radius:50%;transition:width .2s,height .2s,margin .2s,background .2s}
+#cur2.h{width:54px;height:54px;margin:-27px 0 0 -27px;background:rgba(90,168,255,.12)}
+.nw{position:relative}
+.sg{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--bg2);border:1px solid var(--line);border-radius:14px;overflow:hidden;z-index:20;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+.sg[hidden]{display:none}
+.sg button{display:flex;gap:12px;align-items:center;width:100%;background:none;border:0;color:var(--tx);font:inherit;padding:9px 12px;text-align:left}
+.sg button:hover{background:rgba(90,168,255,.15)}
+.sg img,.sg i{width:36px;height:36px;border-radius:50%;background:var(--line);flex:none}
+.sg small{display:block;color:var(--mut);font-size:12px}
+.ok{font-size:13px;color:var(--ice);margin-top:8px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);opacity:0;background:var(--bg2);border:1px solid var(--ice);border-radius:14px;padding:12px 20px;z-index:100;transition:.35s;max-width:90vw;text-align:center}
+.toast.s{transform:translate(-50%,0);opacity:1}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding-top:24px}nav a.x{display:none}}
+@media(prefers-reduced-motion:reduce){.btn::after{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<canvas id="snow"></canvas><div class="glow"></div>
+<div id="cur"></div><div id="cur2"></div>
+<header><div class="wrap">
+<a class="logo" href="#">rbx<b>frost</b> ❄</a>
+<nav><a class="x" href="#packs">Пакеты</a><a class="x" href="#how">Как это работает</a><a class="x" href="#faq">Вопросы</a>
+<button class="ib" id="snd" title="Звук" aria-label="Звук">🔊</button><button class="ib" id="thm" title="Тема" aria-label="Тема">◐</button></nav>
+</div></header>
+<main>
+<div class="wrap hero">
+<div>
+<h1>Робуксы по курсу <span>1 ₽ = 1,3 R$</span></h1>
+<p class="lead">Выгоднее, чем в игре. Укажи ник, выбери сумму — Robux придут на аккаунт без передачи пароля.</p>
+<div class="tags"><span>❄ Без пароля</span><span>⚡ Быстрая выдача</span><span>🛟 Поддержка в Telegram</span></div>
+</div>
+<div class="box" id="calc">
+<h3>Рассчитай заказ</h3><div class="rate">Курс: 1 ₽ = 1,3 R$</div>
+<label for="rub">Ты платишь, ₽</label><input class="in" id="rub" type="number" inputmode="numeric" min="50" value="500">
+<label for="rbx">Ты получаешь, R$</label><input class="in" id="rbx" type="number" inputmode="numeric" value="650">
+<div class="row"><button class="chip">100</button><button class="chip">500</button><button class="chip">1000</button><button class="chip">2500</button></div>
+<label for="nick">Ник в Roblox</label><div class="nw"><input class="in" id="nick" placeholder="Начни вводить ник" autocomplete="off"><div class="sg" id="sg" hidden></div></div><div class="ok" id="ok"></div>
+<button class="btn" id="buy">Купить Robux</button>
+<div class="small">Минимальный заказ — 50 ₽. Заказ откроется в Telegram.</div>
+</div></div>
+
+<section id="packs"><div class="wrap"><h2>Популярные пакеты</h2>
+<div class="grid">
+<button class="card pk" data-r="100"><div class="r">130 R$</div><div class="p">100 ₽</div></button>
+<button class="card pk" data-r="500"><div class="r">650 R$</div><div class="p">500 ₽</div></button>
+<button class="card pk hot" data-r="1000"><div class="r">1 300 R$<em>хит</em></div><div class="p">1 000 ₽</div></button>
+<button class="card pk" data-r="2500"><div class="r">3 250 R$</div><div class="p">2 500 ₽</div></button>
+</div></div></section>
+
+<section id="how"><div class="wrap"><h2>Как получить Robux</h2>
+<div class="grid">
+<div class="card"><div class="ic">1️⃣</div><h3>Выбери сумму</h3><p>Введи рубли или нужное число Robux — калькулятор посчитает сам.</p></div>
+<div class="card"><div class="ic">2️⃣</div><h3>Напиши ник</h3><p>Нужен только ник. Пароль и код из почты мы никогда не просим.</p></div>
+<div class="card"><div class="ic">3️⃣</div><h3>Оплати и получи</h3><p>Оператор ответит в Telegram, подскажет способ оплаты и выдаст Robux.</p></div>
+</div></div></section>
+
+<section><div class="wrap"><h2>Почему rbxfrost</h2>
+<div class="grid">
+<div class="card"><div class="ic">💎</div><h3>Честный курс</h3><p>Один курс для всех сумм, без скрытых комиссий.</p></div>
+<div class="card"><div class="ic">🔒</div><h3>Безопасно</h3><p>Без доступа к аккаунту: меньше рисков для тебя.</p></div>
+<div class="card"><div class="ic">🧊</div><h3>Живая поддержка</h3><p>Отвечаем на вопросы до и после покупки.</p></div>
+</div></div></section>
+
+<section id="faq"><div class="wrap"><h2>Частые вопросы</h2>
+<details><summary>Нужен ли пароль от аккаунта?</summary><p>Нет. Нужен только ник. Если кто-то просит пароль — это не мы.</p></details>
+<details><summary>Как быстро придут Robux?</summary><p>Обычно после подтверждения оплаты оператором. Точное время подскажем в чате.</p></details>
+<details><summary>Какой минимальный заказ?</summary><p>50 ₽ — это 65 R$.</p></details>
+<details><summary>Что, если что-то пошло не так?</summary><p>Напиши в Telegram, разберёмся с каждым заказом.</p></details>
+</div></section>
+</main>
+<footer><div class="wrap">© rbxfrost. Магазин не связан с Roblox Corporation. Roblox и Robux — товарные знаки их владельцев.</div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const R=1.3,TG="https://t.me/rbxfrost"; // замени на свой Telegram
+const PROXY=""; // адрес твоего воркера, см. worker.js
+const $=s=>document.querySelector(s),rub=$("#rub"),rbx=$("#rbx"),nick=$("#nick");
+let on=true,ctx;
+try{on=localStorage.getItem("snd")!=="0"}catch(e){}
+function tone(f,d,t="sine",v=.03,w=0){if(!on)return;try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator(),g=ctx.createGain(),n=ctx.currentTime+w;o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(ctx.destination);o.start(n);o.stop(n+d)}catch(e){}}
+const tick=()=>tone(1400,.05,"triangle",.015),chime=()=>[880,1318,1760].forEach((f,i)=>tone(f,.35,"sine",.03,i*.08));
+function sync(){$("#snd").textContent=on?"🔊":"🔇"}sync();
+$("#snd").onclick=()=>{on=!on;try{localStorage.setItem("snd",on?"1":"0")}catch(e){}sync();chime()};
+$("#thm").onclick=()=>{const d=document.documentElement,c=d.dataset.theme||(matchMedia("(prefers-color-scheme:light)").matches?"light":"dark");d.dataset.theme=c==="dark"?"light":"dark";tick()};
+const fmt=n=>Math.floor(n);
+rub.oninput=()=>{rbx.value=fmt(rub.value*R)||"";mark()};
+rbx.oninput=()=>{rub.value=Math.ceil(rbx.value/R)||"";mark()};
+function mark(){document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("on",c.textContent==rub.value))}
+function setRub(v){rub.value=v;rub.oninput();$("#calc").scrollIntoView({behavior:"smooth",block:"center"})}
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{setRub(c.textContent);chime()});
+document.querySelectorAll(".pk").forEach(c=>c.onclick=()=>{setRub(c.dataset.r);chime()});
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("s");setTimeout(()=>t.classList.remove("s"),2600)}
+$("#buy").onclick=()=>{
+ const r=+rub.value,n=nick.value.trim();
+ if(!(r>=50)){toast("Минимальный заказ — 50 ₽");tone(220,.25,"sawtooth",.025);return}
+ if(!n){toast("Введи ник в Roblox");nick.focus();tone(220,.25,"sawtooth",.025);return}
+ chime();
+ const m=`Привет! Хочу купить ${fmt(r*R)} R$ за ${r} ₽. Ник: ${n}`+(picked?` (ID ${picked.id})`:"");
+ setTimeout(()=>window.open(TG+"?text="+encodeURIComponent(m),"_blank"),350);
+};
+document.querySelectorAll("a,button,summary,input").forEach(e=>e.addEventListener("mouseenter",tick));
+// roblox search
+const sg=$("#sg"),ok=$("#ok");let tm,picked=null;
+nick.addEventListener("input",()=>{picked=null;ok.textContent="";clearTimeout(tm);sg.hidden=true;const q=nick.value.trim();if(!PROXY||q.length<3)return;
+ tm=setTimeout(async()=>{try{const d=(await (await fetch(PROXY+"?q="+encodeURIComponent(q))).json()).data||[];sg.innerHTML="";
+ d.forEach(u=>{const b=document.createElement("button");b.type="button";const im=u.img?document.createElement("img"):document.createElement("i");if(u.img)im.src=u.img;const t=document.createElement("span");t.textContent=u.displayName;const sm=document.createElement("small");sm.textContent="@"+u.name;t.appendChild(sm);b.append(im,t);
+ b.onmouseenter=tick;b.onclick=()=>{picked=u;nick.value=u.name;sg.hidden=true;ok.textContent="✓ Аккаунт выбран: @"+u.name;chime()};sg.appendChild(b)});sg.hidden=!d.length}catch(e){}},300)});
+document.addEventListener("click",e=>{if(!e.target.closest(".nw"))sg.hidden=true});
+// cursor
+const c1=$("#cur"),c2=$("#cur2");let mx=0,my=0,x=0,y=0;
+addEventListener("pointermove",e=>{mx=e.clientX;my=e.clientY;c1.style.transform=`translate(${mx}px,${my}px)`;c2.classList.toggle("h",!!e.target.closest("a,button,summary,input,.pk"))});
+(function l(){x+=(mx-x)*.18;y+=(my-y)*.18;c2.style.transform=`translate(${x}px,${y}px)`;requestAnimationFrame(l)})();
+// snow
+const cv=$("#snow"),g=cv.getContext("2d");let W,H,fl=[];
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener("resize",rs);
+if(!matchMedia("(prefers-reduced-motion:reduce)").matches){
+for(let i=0;i<70;i++)fl.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.2+.6,s:Math.random()*.6+.25,d:Math.random()*6});
+(function a(t){g.clearRect(0,0,W,H);g.fillStyle="rgba(190,220,255,.75)";fl.forEach(f=>{f.y+=f.s;f.x+=Math.sin(t/1500+f.d)*.3;if(f.y>H){f.y=-5;f.x=Math.random()*W}g.beginPath();g.arc(f.x,f.y,f.r,0,7);g.fill()});requestAnimationFrame(a)})(0)}
+</script>
+</body>
+</html>
