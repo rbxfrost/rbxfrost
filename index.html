@@ -82,12 +82,18 @@ footer{border-top:1px solid var(--line);padding:30px 0 40px;color:var(--mut);fon
 .li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
 .li small,.mut{color:var(--mut);font-size:14px}.tt{padding:16px 0 4px;font-size:18px}
 .pf{display:flex;gap:14px;align-items:center;margin-bottom:14px}.pf img,.pf i{width:56px;height:56px;border-radius:50%;background:var(--line)}.pf small{display:block;color:var(--mut)}.oh{font-size:15px;margin:22px 0 4px}
+#packs .grid{grid-template-columns:repeat(4,1fr)}
+.gw{display:flex;justify-content:center;margin-top:26px}
+.pk.gold{width:min(100%,420px);text-align:center;position:relative;border-color:#e8b84a;background:linear-gradient(135deg,rgba(255,213,102,.2),rgba(190,130,20,.1));box-shadow:0 0 38px rgba(255,200,70,.28)}
+.pk.gold:hover{border-color:#ffd76a}
+.pk.gold .r{color:#ffd76a;font-size:34px}.pk.gold .p b{color:#ffd76a;font-size:18px}
+.sh{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#e5303a;color:#fff;border-radius:99px;padding:3px 16px;font-size:13px;font-weight:700;box-shadow:0 4px 14px rgba(229,48,58,.5)}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);opacity:0;background:var(--bg2);border:1px solid var(--ice);border-radius:14px;padding:12px 20px;z-index:100;transition:.35s;max-width:90vw;text-align:center}
 .toast.s{transform:translate(-50%,0);opacity:1}
 @media(max-width:820px){.hero{grid-template-columns:1fr;padding-top:24px;text-align:center}nav a.x{display:none}
 .lead{margin-left:auto;margin-right:auto}.tags{justify-content:center}h2{text-align:center}
 .card,.pk,details,footer{text-align:center}.box h3,.rate{text-align:center}
-header .wrap{justify-content:space-between}.row{justify-content:center}.n{margin:0 auto 12px}}
+header .wrap{justify-content:space-between}.row{justify-content:center}.n{margin:0 auto 12px}#packs .grid{grid-template-columns:repeat(2,1fr)}.pk .r{font-size:20px}.pk.gold .r{font-size:28px}}
 @media(prefers-reduced-motion:reduce){.btn::after{animation:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -121,9 +127,9 @@ header .wrap{justify-content:space-between}.row{justify-content:center}.n{margin
 <button class="card pk" data-r="100"><div class="r">130 R$</div><div class="p">100 ₽</div></button>
 <button class="card pk" data-r="500"><div class="r">650 R$</div><div class="p">500 ₽</div></button>
 <button class="card pk hot" data-r="1000"><div class="r">1 300 R$<em>хит</em></div><div class="p">1 000 ₽</div></button>
-<button class="card pk hot" data-p="p31000"><div class="r">31 000 R$<em>выгода</em></div><div class="p"><s>40 300 ₽</s> <b>38 999 ₽</b></div></button>
 <button class="card pk" data-r="2500"><div class="r">3 250 R$</div><div class="p">2 500 ₽</div></button>
-</div></div></section>
+</div>
+<div class="gw"><button class="card pk gold" data-p="p31000"><span class="sh">Суперхит</span><div class="r">31 000 R$</div><div class="p"><s>40 300 ₽</s> <b>38 999 ₽</b></div></button></div></div></section>
 
 <section id="how"><div class="wrap"><h2>Как получить Robux</h2>
 <div class="grid">
