@@ -88,6 +88,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 40px;color:var(--mut);fon
 .pk.gold:hover{border-color:#ffd76a}
 .pk.gold .r{color:#ffd76a;font-size:34px}.pk.gold .p b{color:#ffd76a;font-size:18px}
 .sh{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#e5303a;color:#fff;border-radius:99px;padding:3px 16px;font-size:13px;font-weight:700;box-shadow:0 4px 14px rgba(229,48,58,.5)}
+.stt{display:block;margin-top:2px}.stt.done{color:#6fe3a0}.stt.paid{color:var(--ice2)}.stt.cancel{color:#ff8a8a}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);opacity:0;background:var(--bg2);border:1px solid var(--ice);border-radius:14px;padding:12px 20px;z-index:100;transition:.35s;max-width:90vw;text-align:center}
 .toast.s{transform:translate(-50%,0);opacity:1}
 @media(max-width:820px){.hero{grid-template-columns:1fr;padding-top:24px;text-align:center}nav a.x{display:none}
@@ -200,7 +201,7 @@ function openD(m){mode=m;dr.classList.add("o");mode==="cart"?cartV():profV()}
 $("#dx").onclick=()=>dr.classList.remove("o");dr.onclick=e=>{if(e.target===dr)dr.classList.remove("o")};
 $("#cartb").onclick=()=>{done=null;openD("cart")};$("#prof").onclick=()=>openD("prof");
 function cartV(){dt.textContent="Корзина";
- if(done){db.innerHTML=`<p class="ok">✓ Заказ №${esc(done.id)} создан</p><p>${done.rub} ₽ → ${done.rbx} R$</p><p class="mut">${esc(PAY)}</p>`;return}
+ if(done){db.innerHTML=`<p class="ok">✓ Заказ №${esc(done.id)} создан</p><p>${done.rub} ₽ → ${done.rbx} R$</p><p class="mut">${esc(PAY)}</p><p class="mut">Статус заказа смотри в профиле (значок 👤).</p>`;return}
  if(!cart.length){db.innerHTML='<p class="mut">Корзина пуста. Выбери сумму и нажми «Добавить в корзину».</p>';return}
  const rb=cart.reduce((a,x)=>a+itRub(x),0);
  db.innerHTML=cart.map((x,i)=>`<div class="li"><span>${itRbx(x)} R$ <small>${itRub(x)} ₽</small></span><button class="ib" data-i="${i}">✕</button></div>`).join("")+`<div class="tt">Итого: <b>${rb} ₽</b> → ${cart.reduce((a,x)=>a+itRbx(x),0)} R$</div><label>Аккаунт Roblox</label><input class="in" id="cn" value="${esc(me?me.name:"")}"><label>Контакт для связи (Telegram или почта)</label><input class="in" id="ct" placeholder="@username"><button class="btn" id="go">Оформить заказ</button>`;
@@ -211,11 +212,15 @@ async function checkout(){const n=$("#cn").value.trim(),c=$("#ct").value.trim(),
  if(!PROXY){toast("Оформление не подключено");return}
  const b=$("#go");b.disabled=true;b.textContent="Отправляю…";
  try{const r=await fetch(PROXY,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({rub:rb,nick:n,uid:me&&me.name===n?me.id:null,contact:c,items:cart})});const d=await r.json();if(!d.ok)throw 0;
- done={id:d.id,rub:rb,rbx:cart.reduce((a,x)=>a+itRbx(x),0)};orders.unshift({id:d.id,rub:rb,rbx:done.rbx,t:Date.now()});cart=[];if(!me||me.name!==n)me={id:null,name:n,img:""};save();upd();chime();cartV()}
+ done={id:d.id,rub:rb,rbx:cart.reduce((a,x)=>a+itRbx(x),0)};orders.unshift({id:d.id,rub:rb,rbx:done.rbx,t:Date.now(),s:"wait"});cart=[];if(!me||me.name!==n)me={id:null,name:n,img:""};save();upd();chime();cartV()}
  catch(e){toast("Не удалось отправить заказ, попробуй ещё раз");b.disabled=false;b.textContent="Оформить заказ"}}
-function profV(){dt.textContent="Профиль";
- db.innerHTML=(me?`<div class="pf">${me.id?`<img src="${esc(PROXY)}?avatar=${+me.id}" alt="">`:"<i></i>"}<div><b>@${esc(me.name)}</b><small>${me.id?"ID "+esc(me.id):"аккаунт не подтверждён"}</small></div></div><button class="chip" id="out">Сменить аккаунт</button>`:'<p class="mut">Аккаунт не выбран. Введи ник в калькуляторе и выбери его из списка.</p>')+'<h3 class="oh">Мои заказы</h3>'+(orders.length?orders.map(o=>`<div class="li"><span>№${esc(o.id)} <small>${new Date(o.t).toLocaleDateString("ru")}</small></span><b>${o.rub} ₽ → ${o.rbx} R$</b></div>`).join(""):'<p class="mut">Пока заказов нет.</p>');
- const o=$("#out");if(o)o.onclick=()=>{me=null;save();upd();profV()}}
+const STT={wait:"⏳ Ожидает оплаты",paid:"✅ Оплачен, выдаём",done:"📦 Выдан",cancel:"✖ Отменён"};
+async function refresh(){if(!PROXY||!orders.length)return;try{const d=(await(await fetch(PROXY+"?status="+orders.slice(0,20).map(o=>o.id).join(","))).json()).data||{};orders.forEach(o=>{if(d[o.id])o.s=d[o.id]});save();if(dr.classList.contains("o")&&mode==="prof")profR()}catch(e){}}
+setInterval(()=>{if(dr.classList.contains("o")&&mode==="prof")refresh()},15000);
+function profV(){profR();refresh()}
+function profR(){dt.textContent="Профиль";
+ db.innerHTML=(me?`<div class="pf">${me.id?`<img src="${esc(PROXY)}?avatar=${+me.id}" alt="">`:"<i></i>"}<div><b>@${esc(me.name)}</b><small>${me.id?"ID "+esc(me.id):"аккаунт не подтверждён"}</small></div></div><button class="chip" id="out">Сменить аккаунт</button>`:'<p class="mut">Аккаунт не выбран. Введи ник в калькуляторе и выбери его из списка.</p>')+'<h3 class="oh">Мои заказы</h3>'+(orders.length?orders.map(o=>`<div class="li"><span>№${esc(o.id)} <small>${new Date(o.t).toLocaleDateString("ru")}</small><small class="stt ${o.s||"wait"}">${STT[o.s||"wait"]||""}</small></span><b>${o.rub} ₽ → ${o.rbx} R$</b></div>`).join(""):'<p class="mut">Пока заказов нет.</p>');
+ const o=$("#out");if(o)o.onclick=()=>{me=null;save();upd();profR()}}
 if(me)nick.value=me.name;upd();
 document.querySelectorAll("[data-p]").forEach(c=>c.onclick=()=>{const n=nick.value.trim();
  if(!n){toast("Сначала введи ник в Roblox");$("#calc").scrollIntoView({behavior:"smooth",block:"center"});nick.focus();return}
