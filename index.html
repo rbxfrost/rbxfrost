@@ -171,7 +171,7 @@ document.querySelectorAll("a,button,summary,input").forEach(e=>e.addEventListene
 const sg=$("#sg"),ok=$("#ok");let tm,picked=null;
 nick.addEventListener("input",()=>{picked=null;ok.textContent="";clearTimeout(tm);sg.hidden=true;const q=nick.value.trim();if(!PROXY||q.length<3)return;
  tm=setTimeout(async()=>{try{const d=(await (await fetch(PROXY+"?q="+encodeURIComponent(q))).json()).data||[];sg.innerHTML="";
- d.forEach(u=>{const b=document.createElement("button");b.type="button";const im=u.img?document.createElement("img"):document.createElement("i");if(u.img)im.src=u.img;const t=document.createElement("span");t.textContent=u.displayName;const sm=document.createElement("small");sm.textContent="@"+u.name;t.appendChild(sm);b.append(im,t);
+ d.forEach(u=>{const b=document.createElement("button");b.type="button";const im=document.createElement("img");im.src=PROXY+"?avatar="+u.id;const t=document.createElement("span");t.textContent=u.displayName;const sm=document.createElement("small");sm.textContent="@"+u.name;t.appendChild(sm);b.append(im,t);
  b.onmouseenter=tick;b.onclick=()=>{picked=u;setMe(u);nick.value=u.name;sg.hidden=true;ok.textContent="✓ Аккаунт выбран: @"+u.name;chime()};sg.appendChild(b)});sg.hidden=!d.length}catch(e){}},300)});
 document.addEventListener("click",e=>{if(!e.target.closest(".nw"))sg.hidden=true});
 $("#buy").onclick=()=>{const r=Math.round(+rub.value),n=nick.value.trim();
@@ -185,7 +185,7 @@ try{cart=JSON.parse(localStorage.getItem("c")||"[]");me=JSON.parse(localStorage.
 const save=()=>{try{localStorage.setItem("c",JSON.stringify(cart));localStorage.setItem("m",JSON.stringify(me));localStorage.setItem("o",JSON.stringify(orders))}catch(e){}};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>"&#"+c.charCodeAt(0)+";");
 function setMe(u){me={id:u.id,name:u.name,img:u.img||""};save();upd()}
-function upd(){$("#cc").textContent=cart.length||"";$("#prof").innerHTML=me&&me.img?`<img src="${esc(me.img)}" alt="">`:"👤"}
+function upd(){$("#cc").textContent=cart.length||"";$("#prof").innerHTML=me&&me.id?`<img src="${esc(PROXY)}?avatar=${+me.id}" alt="">`:"👤"}
 const dr=$("#dr"),db=$("#db"),dt=$("#dt");let mode="cart";
 function openD(m){mode=m;dr.classList.add("o");mode==="cart"?cartV():profV()}
 $("#dx").onclick=()=>dr.classList.remove("o");dr.onclick=e=>{if(e.target===dr)dr.classList.remove("o")};
@@ -205,7 +205,7 @@ async function checkout(){const n=$("#cn").value.trim(),c=$("#ct").value.trim(),
  done={id:d.id,rub:rb,rbx:fmt(rb*R)};orders.unshift({id:d.id,rub:rb,rbx:done.rbx,t:Date.now()});cart=[];if(!me||me.name!==n)me={id:null,name:n,img:""};save();upd();chime();cartV()}
  catch(e){toast("Не удалось отправить заказ, попробуй ещё раз");b.disabled=false;b.textContent="Оформить заказ"}}
 function profV(){dt.textContent="Профиль";
- db.innerHTML=(me?`<div class="pf">${me.img?`<img src="${esc(me.img)}" alt="">`:"<i></i>"}<div><b>@${esc(me.name)}</b><small>${me.id?"ID "+esc(me.id):"аккаунт не подтверждён"}</small></div></div><button class="chip" id="out">Сменить аккаунт</button>`:'<p class="mut">Аккаунт не выбран. Введи ник в калькуляторе и выбери его из списка.</p>')+'<h3 class="oh">Мои заказы</h3>'+(orders.length?orders.map(o=>`<div class="li"><span>№${esc(o.id)} <small>${new Date(o.t).toLocaleDateString("ru")}</small></span><b>${o.rub} ₽ → ${o.rbx} R$</b></div>`).join(""):'<p class="mut">Пока заказов нет.</p>');
+ db.innerHTML=(me?`<div class="pf">${me.id?`<img src="${esc(PROXY)}?avatar=${+me.id}" alt="">`:"<i></i>"}<div><b>@${esc(me.name)}</b><small>${me.id?"ID "+esc(me.id):"аккаунт не подтверждён"}</small></div></div><button class="chip" id="out">Сменить аккаунт</button>`:'<p class="mut">Аккаунт не выбран. Введи ник в калькуляторе и выбери его из списка.</p>')+'<h3 class="oh">Мои заказы</h3>'+(orders.length?orders.map(o=>`<div class="li"><span>№${esc(o.id)} <small>${new Date(o.t).toLocaleDateString("ru")}</small></span><b>${o.rub} ₽ → ${o.rbx} R$</b></div>`).join(""):'<p class="mut">Пока заказов нет.</p>');
  const o=$("#out");if(o)o.onclick=()=>{me=null;save();upd();profV()}}
 if(me)nick.value=me.name;upd();
 // cursor
