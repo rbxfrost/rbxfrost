@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>rbxfrost — робуксы по курсу 1 ₽ = 1,3 R$</title>
+<title>RBXFrost — робуксы по курсу 1 ₽ = 1,3 R$</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap">
 <style>
 :root{color-scheme:dark;--bg:#0b1f4d;--bg2:#13326e;--card:rgba(120,170,255,.09);--line:rgba(120,170,255,.24);--tx:#e8f1ff;--mut:#93b0dc;--ice:#5aa8ff;--ice2:#a9d0ff;--btn:#4f9bff;--btnt:#04163a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -47,6 +47,7 @@ h2{font-size:clamp(24px,3.4vw,34px);margin-bottom:28px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
 .card h3{font-size:16px;margin-bottom:8px}.card p{margin:0;color:var(--mut);font-size:14px}
+.n{width:38px;height:38px;border-radius:50%;border:1px solid var(--ice);color:var(--ice2);display:flex;align-items:center;justify-content:center;font:700 16px Unbounded,sans-serif;margin:0 0 12px}.pk s{color:var(--mut)}.pk b{color:var(--ice2)}
 .card .ic{font-size:26px;margin-bottom:10px}
 .pk{text-align:left;font:inherit;color:var(--tx);transition:transform .2s,border-color .2s}
 .pk:hover{transform:translateY(-4px);border-color:var(--ice)}
@@ -86,7 +87,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 40px;color:var(--mut);fon
 @media(max-width:820px){.hero{grid-template-columns:1fr;padding-top:24px;text-align:center}nav a.x{display:none}
 .lead{margin-left:auto;margin-right:auto}.tags{justify-content:center}h2{text-align:center}
 .card,.pk,details,footer{text-align:center}.box h3,.rate{text-align:center}
-header .wrap{justify-content:space-between}.row{justify-content:center}}
+header .wrap{justify-content:space-between}.row{justify-content:center}.n{margin:0 auto 12px}}
 @media(prefers-reduced-motion:reduce){.btn::after{animation:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -94,7 +95,7 @@ header .wrap{justify-content:space-between}.row{justify-content:center}}
 <canvas id="snow"></canvas><div class="glow"></div>
 <div id="cur"></div><div id="cur2"></div>
 <header><div class="wrap">
-<a class="logo" href="#">rbx<b>frost</b> ❄</a>
+<a class="logo" href="#">RBX<b>Frost</b> ❄</a>
 <nav><a class="x" href="#packs">Пакеты</a><a class="x" href="#how">Как это работает</a><a class="x" href="#faq">Вопросы</a>
 <button class="ib" id="prof" aria-label="Профиль">👤</button><button class="ib" id="cartb" aria-label="Корзина">🛒<span id="cc"></span></button><button class="ib" id="snd" title="Звук" aria-label="Звук">🔊</button></nav>
 </div></header>
@@ -103,7 +104,7 @@ header .wrap{justify-content:space-between}.row{justify-content:center}}
 <div>
 <h1>Робуксы по курсу <span>1 ₽ = 1,3 R$</span></h1>
 <p class="lead">Выгоднее, чем в игре. Укажи ник, выбери сумму — Robux придут на аккаунт без передачи пароля.</p>
-<div class="tags"><span>❄ Без пароля</span><span>⚡ Быстрая выдача</span><span>🛟 Поддержка в Telegram</span></div>
+<div class="tags"><span>❄ Без входа в аккаунт</span><span>⚡ Быстрая выдача</span><span>🛟 Поддержка в Telegram</span></div>
 </div>
 <div class="box" id="calc">
 <h3>Рассчитай заказ</h3><div class="rate">Курс: 1 ₽ = 1,3 R$</div>
@@ -120,14 +121,15 @@ header .wrap{justify-content:space-between}.row{justify-content:center}}
 <button class="card pk" data-r="100"><div class="r">130 R$</div><div class="p">100 ₽</div></button>
 <button class="card pk" data-r="500"><div class="r">650 R$</div><div class="p">500 ₽</div></button>
 <button class="card pk hot" data-r="1000"><div class="r">1 300 R$<em>хит</em></div><div class="p">1 000 ₽</div></button>
+<button class="card pk hot" data-p="p31000"><div class="r">31 000 R$<em>выгода</em></div><div class="p"><s>40 300 ₽</s> <b>38 999 ₽</b></div></button>
 <button class="card pk" data-r="2500"><div class="r">3 250 R$</div><div class="p">2 500 ₽</div></button>
 </div></div></section>
 
 <section id="how"><div class="wrap"><h2>Как получить Robux</h2>
 <div class="grid">
-<div class="card"><div class="ic">1️⃣</div><h3>Выбери сумму</h3><p>Введи рубли или нужное число Robux — калькулятор посчитает сам.</p></div>
-<div class="card"><div class="ic">2️⃣</div><h3>Напиши ник</h3><p>Нужен только ник. Пароль и код из почты мы никогда не просим.</p></div>
-<div class="card"><div class="ic">3️⃣</div><h3>Оплати и получи</h3><p>Оператор ответит в Telegram, подскажет способ оплаты и выдаст Robux.</p></div>
+<div class="card"><div class="n">1</div><h3>Выбери сумму</h3><p>Введи рубли или нужное число Robux — калькулятор посчитает сам.</p></div>
+<div class="card"><div class="n">2</div><h3>Напиши ник</h3><p>Нужен только ник. Пароль и код из почты мы никогда не просим.</p></div>
+<div class="card"><div class="n">3</div><h3>Оплати и получи</h3><p>Оператор ответит в Telegram, подскажет способ оплаты и выдаст Robux.</p></div>
 </div></div></section>
 
 <section><div class="wrap"><h2>Почему rbxfrost</h2>
@@ -144,7 +146,7 @@ header .wrap{justify-content:space-between}.row{justify-content:center}}
 <details><summary>Что, если что-то пошло не так?</summary><p>Напиши в Telegram, разберёмся с каждым заказом.</p></details>
 </div></section>
 </main>
-<footer><div class="wrap">© rbxfrost. Магазин не связан с Roblox Corporation. Roblox и Robux — товарные знаки их владельцев.</div></footer>
+<footer><div class="wrap">© RBXFrost. Магазин не связан с Roblox Corporation. Roblox и Robux — товарные знаки их владельцев.</div></footer>
 <div class="dr" id="dr"><div class="dp"><div class="dh"><h3 id="dt"></h3><button class="ib" id="dx" aria-label="Закрыть">✕</button></div><div id="db"></div></div></div>
 <div class="toast" id="toast"></div>
 
@@ -164,7 +166,7 @@ rbx.oninput=()=>{rub.value=Math.ceil(rbx.value/R)||"";mark()};
 function mark(){document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("on",c.textContent==rub.value))}
 function setRub(v){rub.value=v;rub.oninput();$("#calc").scrollIntoView({behavior:"smooth",block:"center"})}
 document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{setRub(c.textContent);chime()});
-document.querySelectorAll(".pk").forEach(c=>c.onclick=()=>{setRub(c.dataset.r);chime()});
+document.querySelectorAll(".pk[data-r]").forEach(c=>c.onclick=()=>{setRub(c.dataset.r);chime()});
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("s");setTimeout(()=>t.classList.remove("s"),2600)}
 document.querySelectorAll("a,button,summary,input").forEach(e=>e.addEventListener("mouseenter",tick));
 // roblox search
@@ -180,6 +182,7 @@ $("#buy").onclick=()=>{const r=Math.round(+rub.value),n=nick.value.trim();
  if(!me||me.name!==n)me=picked?{id:picked.id,name:picked.name,img:picked.img||""}:{id:null,name:n,img:""};
  cart.push(r);save();upd();chime();done=null;openD("cart")};
 const PAY="Оператор свяжется с тобой и пришлёт реквизиты для оплаты."; // впиши свои реквизиты
+const PK={p31000:{rub:38999,rbx:31000}},itRub=x=>PK[x]?PK[x].rub:x,itRbx=x=>PK[x]?PK[x].rbx:fmt(x*R);
 let cart=[],me=null,orders=[],done=null;
 try{cart=JSON.parse(localStorage.getItem("c")||"[]");me=JSON.parse(localStorage.getItem("m")||"null");orders=JSON.parse(localStorage.getItem("o")||"[]")}catch(e){}
 const save=()=>{try{localStorage.setItem("c",JSON.stringify(cart));localStorage.setItem("m",JSON.stringify(me));localStorage.setItem("o",JSON.stringify(orders))}catch(e){}};
@@ -193,21 +196,25 @@ $("#cartb").onclick=()=>{done=null;openD("cart")};$("#prof").onclick=()=>openD("
 function cartV(){dt.textContent="Корзина";
  if(done){db.innerHTML=`<p class="ok">✓ Заказ №${esc(done.id)} создан</p><p>${done.rub} ₽ → ${done.rbx} R$</p><p class="mut">${esc(PAY)}</p>`;return}
  if(!cart.length){db.innerHTML='<p class="mut">Корзина пуста. Выбери сумму и нажми «Добавить в корзину».</p>';return}
- const rb=cart.reduce((a,x)=>a+x,0);
- db.innerHTML=cart.map((x,i)=>`<div class="li"><span>${fmt(x*R)} R$ <small>${x} ₽</small></span><button class="ib" data-i="${i}">✕</button></div>`).join("")+`<div class="tt">Итого: <b>${rb} ₽</b> → ${fmt(rb*R)} R$</div><label>Аккаунт Roblox</label><input class="in" id="cn" value="${esc(me?me.name:"")}"><label>Контакт для связи (Telegram или почта)</label><input class="in" id="ct" placeholder="@username"><button class="btn" id="go">Оформить заказ</button>`;
+ const rb=cart.reduce((a,x)=>a+itRub(x),0);
+ db.innerHTML=cart.map((x,i)=>`<div class="li"><span>${itRbx(x)} R$ <small>${itRub(x)} ₽</small></span><button class="ib" data-i="${i}">✕</button></div>`).join("")+`<div class="tt">Итого: <b>${rb} ₽</b> → ${cart.reduce((a,x)=>a+itRbx(x),0)} R$</div><label>Аккаунт Roblox</label><input class="in" id="cn" value="${esc(me?me.name:"")}"><label>Контакт для связи (Telegram или почта)</label><input class="in" id="ct" placeholder="@username"><button class="btn" id="go">Оформить заказ</button>`;
  db.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.i,1);save();upd();cartV();tick()});
  $("#go").onclick=checkout}
-async function checkout(){const n=$("#cn").value.trim(),c=$("#ct").value.trim(),rb=cart.reduce((a,x)=>a+x,0);
+async function checkout(){const n=$("#cn").value.trim(),c=$("#ct").value.trim(),rb=cart.reduce((a,x)=>a+itRub(x),0);
  if(!n||!c){toast("Заполни ник и контакт");tone(220,.25,"sawtooth",.025);return}
  if(!PROXY){toast("Оформление не подключено");return}
  const b=$("#go");b.disabled=true;b.textContent="Отправляю…";
- try{const r=await fetch(PROXY,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({rub:rb,nick:n,uid:me&&me.name===n?me.id:null,contact:c})});const d=await r.json();if(!d.ok)throw 0;
- done={id:d.id,rub:rb,rbx:fmt(rb*R)};orders.unshift({id:d.id,rub:rb,rbx:done.rbx,t:Date.now()});cart=[];if(!me||me.name!==n)me={id:null,name:n,img:""};save();upd();chime();cartV()}
+ try{const r=await fetch(PROXY,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({rub:rb,nick:n,uid:me&&me.name===n?me.id:null,contact:c,items:cart})});const d=await r.json();if(!d.ok)throw 0;
+ done={id:d.id,rub:rb,rbx:cart.reduce((a,x)=>a+itRbx(x),0)};orders.unshift({id:d.id,rub:rb,rbx:done.rbx,t:Date.now()});cart=[];if(!me||me.name!==n)me={id:null,name:n,img:""};save();upd();chime();cartV()}
  catch(e){toast("Не удалось отправить заказ, попробуй ещё раз");b.disabled=false;b.textContent="Оформить заказ"}}
 function profV(){dt.textContent="Профиль";
  db.innerHTML=(me?`<div class="pf">${me.id?`<img src="${esc(PROXY)}?avatar=${+me.id}" alt="">`:"<i></i>"}<div><b>@${esc(me.name)}</b><small>${me.id?"ID "+esc(me.id):"аккаунт не подтверждён"}</small></div></div><button class="chip" id="out">Сменить аккаунт</button>`:'<p class="mut">Аккаунт не выбран. Введи ник в калькуляторе и выбери его из списка.</p>')+'<h3 class="oh">Мои заказы</h3>'+(orders.length?orders.map(o=>`<div class="li"><span>№${esc(o.id)} <small>${new Date(o.t).toLocaleDateString("ru")}</small></span><b>${o.rub} ₽ → ${o.rbx} R$</b></div>`).join(""):'<p class="mut">Пока заказов нет.</p>');
  const o=$("#out");if(o)o.onclick=()=>{me=null;save();upd();profV()}}
 if(me)nick.value=me.name;upd();
+document.querySelectorAll("[data-p]").forEach(c=>c.onclick=()=>{const n=nick.value.trim();
+ if(!n){toast("Сначала введи ник в Roblox");$("#calc").scrollIntoView({behavior:"smooth",block:"center"});nick.focus();return}
+ if(!me||me.name!==n)me=picked?{id:picked.id,name:picked.name,img:picked.img||""}:{id:null,name:n,img:""};
+ cart.push(c.dataset.p);save();upd();chime();done=null;openD("cart")});
 // cursor
 const c1=$("#cur"),c2=$("#cur2");let mx=0,my=0,x=0,y=0;
 addEventListener("pointermove",e=>{mx=e.clientX;my=e.clientY;c1.style.transform=`translate(${mx}px,${my}px)`;c2.classList.toggle("h",!!e.target.closest("a,button,summary,input,.pk"))});
